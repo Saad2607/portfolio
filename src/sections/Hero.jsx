@@ -52,14 +52,14 @@ const Hero = () => {
                     className="mt-8 flex flex-col sm:flex-row justify-center gap-4"
                 >
                     <a
-                        href="#projects"
+                        href="#Projects"
                         className="px-6 py-3 bg-blue-500 rounded-xl transition transform hover:scale-105 hover:bg-blue-600"
                     >
                         View Projects
                     </a>
 
                     <a
-                        href="#contact"
+                        href="#Contact"
                         className="px-6 py-3 border border-gray-600 hover:border-white rounded-xl hover:scale-105 transition"
                     >
                         Contact Me
