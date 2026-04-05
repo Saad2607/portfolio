@@ -30,11 +30,11 @@ const Hero = () => {
                 >
                     <TypeAnimation
                         sequence={[
-                            "Full Stack Developer (MERN)",
+                            "Full Stack Developer (MERN).",
                             2000,
-                            "I build scalable web applications",
+                            "I build scalable web applications.",
                             2000,
-                            "I create modern UI/UX experiences",
+                            "I create modern UI/UX experiences.",
                             2000,
                         ]}
                         wrapper="p"
