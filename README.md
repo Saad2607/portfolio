@@ -71,10 +71,10 @@ npm run dev
 
 ## 👨‍💻 Author
 
-**Your Name**
+**Shaikh Mohammed Saad**
 
-* GitHub: https://github.com/your-username
-* LinkedIn: https://linkedin.com/in/your-profile
+* GitHub: https://github.com/Saad2607
+* LinkedIn: https://linkedin.com/in/mohammed-saad-shaikh-18a3032bb/
 
 ---
 
