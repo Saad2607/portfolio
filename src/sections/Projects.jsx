@@ -32,7 +32,15 @@ const projects = [
         title: "🔐 SecureVault - Cloud File Storage",
         description: "A full-stack cloud file storage platform with secure authentication, file upload, sharing, and storage management features similar to Google Drive.",
         tech: ["React", "Node.js", "MongoDB", "Express", "Cloudinary"],
-        github: "https://github.com/Saad2607/secure-file-vault",
+        features: [
+            "🔐 Secure JWT Authentication",
+            "📂 File Upload & Cloud Storage",
+            "⭐ Favorites & Trash System",
+            "🔗 File Sharing via Link",
+            "📊 Storage Usage Tracking",
+            "👤 Profile & Avatar Upload"
+        ],
+        github: "https://github.com/Saad2607/securevault",
         live: "https://secure-file-vault-sigma.vercel.app/",
     },
     {
