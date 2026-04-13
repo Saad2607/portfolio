@@ -1,5 +1,4 @@
 const upcomingProjects = [
-    "Secure File Vault (MERN + Encryption)",
     "AI Resume Analyzer",
 ];
 

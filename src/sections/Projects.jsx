@@ -29,6 +29,13 @@ const projects = [
         live: "https://quickkart-sigma.vercel.app/",
     },
     {
+        title: "🔐 SecureVault - Cloud File Storage",
+        description: "A full-stack cloud file storage platform with secure authentication, file upload, sharing, and storage management features similar to Google Drive.",
+        tech: ["React", "Node.js", "MongoDB", "Express", "Cloudinary"],
+        github: "https://github.com/Saad2607/secure-file-vault",
+        live: "https://secure-file-vault-sigma.vercel.app/",
+    },
+    {
         title: "🏠 Interior Design Website",
         description:
             "A responsive and visually engaging website showcasing modern interior design concepts. Focused on UI/UX principles, the project demonstrates clean layout structuring and mobile-friendly design.",
