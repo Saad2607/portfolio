@@ -1,5 +1,4 @@
 const upcomingProjects = [
-    "AI Resume Analyzer",
 ];
 
 const Upcoming = () => {
