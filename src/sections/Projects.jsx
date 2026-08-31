@@ -1,143 +1,77 @@
-import { motion } from "framer-motion";
-import { FaGithub, FaExternalLinkAlt, FaCheckCircle } from "react-icons/fa";
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import SectionHeading from "../components/SectionHeading";
+import ProjectCard from "../components/ProjectCard";
+import GitHubStats from "../components/GitHubStats";
+import { projectsData, projectCategories } from "../data/projectsData";
 
-const projects = [
-    {
-        title: "🩸 Blood Bank Management System",
-        description:
-            "A MERN-based blood bank management system that streamlines donor registration, blood inventory tracking, and request handling. Built to improve data organization and ensure efficient access to critical healthcare resources.",
-        tech: ["MongoDB", "Express", "React", "Node.js"],
-        features: [
-            "Donor management",
-            "Inventory tracking",
-            "Request handling"
-        ],
-        github: "https://github.com/Saad2607/blood-bank-management-system",
-        live: "#",
-    },
-    {
-        title: "🛒 E-commerce Website",
-        description:
-            "A full-stack MERN e-commerce platform featuring user authentication, product management, and a dynamic shopping cart system. Designed with scalable architecture and responsive UI, the application supports seamless user experience and efficient state management.",
-        tech: ["MongoDB", "Express", "React", "Node.js"],
-        features: [
-            "User authentication",
-            "Cart system",
-            "Product listing",
-        ],
-        github: "https://github.com/Saad2607/E-Commerce",
-        live: "https://quickkart-sigma.vercel.app/",
-    },
-    {
-        title: "🔐 SecureVault - Cloud File Storage",
-        description: "A full-stack cloud file storage platform with secure authentication, file upload, sharing, and storage management features similar to Google Drive.",
-        tech: ["React", "Node.js", "MongoDB", "Express", "Cloudinary"],
-        features: [
-            "🔐 Secure JWT Authentication",
-            "📂 File Upload & Cloud Storage",
-            "⭐ Favorites & Trash System",
-            "🔗 File Sharing via Link",
-            "📊 Storage Usage Tracking",
-            "👤 Profile & Avatar Upload"
-        ],
-        github: "https://github.com/Saad2607/securevault",
-        live: "https://secure-file-vault-sigma.vercel.app/",
-    },
-    {
-        title: "🏠 Interior Design Website",
-        description:
-            "A responsive and visually engaging website showcasing modern interior design concepts. Focused on UI/UX principles, the project demonstrates clean layout structuring and mobile-friendly design.",
-        tech: ["HTML", "CSS", "JavaScript"],
-        features: [
-            "Responsive layout",
-            "Modern UI",
-            "Smooth navigation"
-        ],
-        github: "https://github.com/Saad2607/interior-designing",
-        live: "https://saad2607.github.io/interior-designing/",
-    },
-];
+const Projects = ({ onSelectProject }) => {
+  const [activeCategory, setActiveCategory] = useState("All");
 
-const Projects = () => {
-    return (
-        <section id="Projects" className="py-20 px-4 sm:px-4 scroll-mt-20">
-            <div className="max-w-7xl mx-auto">
+  const filteredProjects =
+    activeCategory === "All"
+      ? projectsData
+      : projectsData.filter((p) => p.category === activeCategory);
 
-                {/* Heading */}
-                <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">
-                    My <span className="text-blue-500">Projects</span>
-                </h2>
+  return (
+    <section id="projects" className="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto scroll-mt-20">
+      <SectionHeading
+        badge="COMPLETE REPERTORY"
+        title="All"
+        highlight="Projects & Work"
+        subtitle="Explore my complete catalog of full-stack systems, client solutions, and mobile apps."
+      />
 
-                {/* Grid */}
-                <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-8">
-                    {projects.map((project, index) => (
-                        <motion.div
-                            key={index}
-                            initial={{ opacity: 0, y: 60 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ duration: 0.6, ease: "easeOut" }}
-                            className="bg-gray-900/60 backdrop-blur-lg border border-gray-800 rounded-2xl p-6 hover:border-blue-500 hover:shadow-lg hover:shadow-blue-500/10 transition duration-300"
-                        >
+      {/* Filter Tabs */}
+      <div className="flex flex-wrap items-center justify-center gap-2 mb-12">
+        {projectCategories.map((cat) => {
+          const isActive = activeCategory === cat;
+          return (
+            <button
+              key={cat}
+              onClick={() => setActiveCategory(cat)}
+              className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-medium transition-all duration-200 ${
+                isActive
+                  ? "bg-blue-600 text-white shadow-md shadow-blue-500/25 scale-105"
+                  : "bg-white text-slate-600 hover:text-slate-900 hover:bg-slate-100 border border-slate-200 dark:bg-slate-900/60 dark:text-slate-400 dark:hover:text-slate-200 dark:hover:bg-slate-800 dark:border-slate-800/80 shadow-sm dark:shadow-none"
+              }`}
+            >
+              {cat}
+            </button>
+          );
+        })}
+      </div>
 
-                            {/* Title */}
-                            <h3 className="text-xl font-semibold mb-3">
-                                {project.title}
-                            </h3>
+      {/* Projects Grid */}
+      <motion.div
+        layout
+        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-20"
+      >
+        <AnimatePresence>
+          {filteredProjects.map((project) => (
+            <ProjectCard
+              key={project.id}
+              project={project}
+              onSelectProject={onSelectProject}
+            />
+          ))}
+        </AnimatePresence>
+      </motion.div>
 
-                            {/* Description */}
-                            <p className="text-gray-400 text-sm mb-4">
-                                {project.description}
-                            </p>
-
-                            {/* Features */}
-                            <ul className="text-xs text-gray-400 mb-4 space-y-1">
-                                {project.features.map((feature, i) => (
-                                    <li key={i} className="flex items-center gap-2">
-                                        <FaCheckCircle className="text-blue-500 text-xs" />
-                                        {feature}
-                                    </li>
-                                ))}
-                            </ul>
-
-                            {/* Tech Stack */}
-                            <div className="flex flex-wrap gap-2 mb-4">
-                                {project.tech.map((tech, i) => (
-                                    <span
-                                        key={i}
-                                        className="text-xs bg-gray-800 px-3 py-1 rounded-full"
-                                    >
-                                        {tech}
-                                    </span>
-                                ))}
-                            </div>
-
-                            {/* Buttons */}
-                            <div className="flex gap-4">
-                                <a
-                                    href={project.github}
-                                    target="_blank"
-                                    className="flex items-center gap-2 text-sm hover:text-blue-500"
-                                >
-                                    <FaGithub /> Code
-                                </a>
-
-                                <a
-                                    href={project.live}
-                                    target="_blank"
-                                    className="flex items-center gap-2 text-sm hover:text-blue-500"
-                                >
-                                    <FaExternalLinkAlt /> Live
-                                </a>
-                            </div>
-
-                        </motion.div>
-                    ))}
-                </div>
-
-            </div>
-        </section>
-    );
+      {/* GitHub Activity & Repositories */}
+      <div className="pt-8">
+        <div className="text-center mb-8">
+          <span className="text-xs font-mono font-semibold text-blue-600 dark:text-blue-400 uppercase tracking-widest block mb-2">
+            OPEN SOURCE & VERSION CONTROL
+          </span>
+          <h3 className="text-2xl font-bold text-slate-900 dark:text-white">
+            GitHub & Coding Activity
+          </h3>
+        </div>
+        <GitHubStats />
+      </div>
+    </section>
+  );
 };
 
 export default Projects;
