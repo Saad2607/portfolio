@@ -8,16 +8,16 @@ const Hero = () => {
   return (
     <section
       id="home"
-      className="relative min-h-[90vh] flex items-center justify-center pt-28 pb-16 px-4 sm:px-6 lg:px-8 overflow-hidden"
+      className="relative min-h-[90vh] flex items-center justify-center pt-24 sm:pt-28 pb-16 px-4 sm:px-6 lg:px-8 overflow-hidden w-full"
     >
       {/* Background Gradients */}
       <div className="absolute inset-0 bg-hero-gradient pointer-events-none opacity-40 dark:opacity-60"></div>
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-blue-500/5 dark:bg-blue-600/10 blur-[130px] rounded-full pointer-events-none"></div>
+      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[320px] sm:w-[500px] h-[320px] sm:h-[500px] bg-blue-500/5 dark:bg-blue-600/10 blur-[100px] sm:blur-[130px] rounded-full pointer-events-none"></div>
 
-      <div className="max-w-7xl mx-auto w-full grid lg:grid-cols-12 gap-12 lg:gap-8 items-center relative z-10">
+      <div className="max-w-7xl mx-auto w-full grid lg:grid-cols-12 gap-10 lg:gap-8 items-center relative z-10">
         
         {/* Left Column: Bio & CTAs (7 cols on lg) */}
-        <div className="lg:col-span-7 text-left space-y-6">
+        <div className="lg:col-span-7 text-left space-y-5 sm:space-y-6 w-full">
           
           {/* Status Badge */}
           <motion.div
@@ -40,11 +40,12 @@ const Hero = () => {
             initial={{ opacity: 0, y: 25 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.1 }}
+            className="w-full overflow-hidden"
           >
-            <span className="text-sm sm:text-base font-mono text-blue-600 dark:text-blue-400 font-semibold block mb-2">
+            <span className="text-xs sm:text-base font-mono text-blue-600 dark:text-blue-400 font-semibold block mb-1.5 sm:mb-2">
               Hello World, I'm
             </span>
-            <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-slate-900 dark:text-white tracking-tight leading-none">
+            <h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-slate-900 dark:text-white tracking-tight leading-tight break-words">
               {personalInfo.name}
             </h1>
           </motion.div>
@@ -54,9 +55,9 @@ const Hero = () => {
             initial={{ opacity: 0, y: 25 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="text-lg sm:text-xl md:text-2xl font-medium text-slate-700 dark:text-slate-300 min-h-[40px] flex items-center"
+            className="text-base sm:text-xl md:text-2xl font-medium text-slate-700 dark:text-slate-300 min-h-[48px] sm:min-h-[40px] flex items-center"
           >
-            <span className="text-slate-400 dark:text-slate-500 mr-2">&gt;</span>
+            <span className="text-slate-400 dark:text-slate-500 mr-2 shrink-0">&gt;</span>
             <TypeAnimation
               sequence={[
                 "Full-Stack Developer (MERN Stack).",
@@ -80,21 +81,21 @@ const Hero = () => {
             initial={{ opacity: 0, y: 25 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.3 }}
-            className="text-sm sm:text-base text-slate-600 dark:text-slate-400 max-w-xl leading-relaxed"
+            className="text-xs sm:text-sm md:text-base text-slate-600 dark:text-slate-400 max-w-xl leading-relaxed"
           >
             Specialized in engineering full-stack web and mobile applications with <strong>React.js</strong>, <strong>Node.js</strong>, <strong>MongoDB</strong>, and <strong>Flutter</strong>. Focused on clean software architecture, intuitive UI/UX, and high performance.
           </motion.p>
 
-          {/* Action CTAs */}
+          {/* Action CTAs: Full-width on mobile, auto on tablet/desktop */}
           <motion.div
             initial={{ opacity: 0, y: 25 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.4 }}
-            className="flex flex-wrap items-center gap-3 pt-2"
+            className="flex flex-col sm:flex-row sm:flex-wrap items-stretch sm:items-center gap-3 pt-2 w-full"
           >
             <a
               href="#featured"
-              className="flex items-center gap-2 px-6 py-3.5 rounded-xl font-semibold text-sm bg-blue-600 hover:bg-blue-500 text-white shadow-lg shadow-blue-500/25 transition transform hover:-translate-y-0.5"
+              className="w-full sm:w-auto flex items-center justify-center gap-2 px-5 sm:px-6 py-3.5 rounded-xl font-semibold text-sm bg-blue-600 hover:bg-blue-500 text-white shadow-lg shadow-blue-500/25 transition transform hover:-translate-y-0.5 text-center"
             >
               <span>Explore Featured Work</span>
               <FaArrowRight className="text-xs" />
@@ -103,7 +104,7 @@ const Hero = () => {
             <a
               href={personalInfo.resume.downloadUrl}
               download
-              className="flex items-center gap-2 px-5 py-3.5 rounded-xl font-semibold text-sm bg-white hover:bg-slate-100 text-slate-800 border border-slate-200 shadow-sm dark:bg-slate-900/90 dark:hover:bg-slate-800 dark:text-slate-200 dark:border-slate-700 transition transform hover:-translate-y-0.5"
+              className="w-full sm:w-auto flex items-center justify-center gap-2 px-5 py-3.5 rounded-xl font-semibold text-sm bg-white hover:bg-slate-100 text-slate-800 border border-slate-200 shadow-sm dark:bg-slate-900/90 dark:hover:bg-slate-800 dark:text-slate-200 dark:border-slate-700 transition transform hover:-translate-y-0.5 text-center"
             >
               <FaFileDownload className="text-xs text-blue-500 dark:text-blue-400" />
               <span>Download Resume</span>
@@ -111,7 +112,7 @@ const Hero = () => {
 
             <a
               href="#contact"
-              className="flex items-center gap-2 px-5 py-3.5 rounded-xl font-medium text-sm text-slate-600 hover:text-slate-900 hover:bg-slate-100 dark:text-slate-400 dark:hover:text-white dark:hover:bg-slate-900/60 transition"
+              className="w-full sm:w-auto flex items-center justify-center gap-2 px-5 py-3.5 rounded-xl font-medium text-sm text-slate-600 hover:text-slate-900 hover:bg-slate-100 dark:text-slate-400 dark:hover:text-white dark:hover:bg-slate-900/60 transition text-center"
             >
               <span>Get In Touch</span>
             </a>
@@ -158,7 +159,7 @@ const Hero = () => {
           initial={{ opacity: 0, scale: 0.95, y: 30 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.3 }}
-          className="lg:col-span-5 flex justify-center w-full"
+          className="lg:col-span-5 flex justify-center w-full min-w-0"
         >
           <TerminalVisual />
         </motion.div>
