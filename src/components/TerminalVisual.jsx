@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { FaTerminal, FaCode, FaCheck, FaCopy, FaPlay } from "react-icons/fa";
+import { FaTerminal, FaCheck, FaCopy, FaPlay } from "react-icons/fa";
 import { SiJavascript, SiJson, SiGnubash } from "react-icons/si";
 
 const tabs = [
@@ -77,33 +77,33 @@ const TerminalVisual = () => {
   };
 
   return (
-    <div className="w-full max-w-xl mx-auto rounded-2xl overflow-hidden shadow-2xl border border-slate-300 dark:border-slate-800/80 bg-slate-950/95 text-left font-mono">
+    <div className="w-full max-w-xl mx-auto rounded-2xl overflow-hidden shadow-xl sm:shadow-2xl border border-slate-300 dark:border-slate-800/80 bg-slate-950/95 text-left font-mono">
       {/* Window Titlebar */}
-      <div className="flex items-center justify-between px-4 py-3 bg-slate-900/90 border-b border-slate-800">
-        <div className="flex items-center gap-2">
-          <div className="w-3 h-3 rounded-full bg-rose-500/80 hover:opacity-100 transition cursor-pointer"></div>
-          <div className="w-3 h-3 rounded-full bg-amber-500/80 hover:opacity-100 transition cursor-pointer"></div>
-          <div className="w-3 h-3 rounded-full bg-emerald-500/80 hover:opacity-100 transition cursor-pointer"></div>
-          <span className="ml-2 text-xs text-slate-400 flex items-center gap-1.5 font-sans">
-            <FaTerminal className="text-blue-400 text-[10px]" />
-            saad-dev-environment v2.4
+      <div className="flex items-center justify-between px-3 sm:px-4 py-2.5 sm:py-3 bg-slate-900/90 border-b border-slate-800 gap-2">
+        <div className="flex items-center gap-1.5 sm:gap-2 min-w-0">
+          <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-rose-500/80 shrink-0"></div>
+          <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-amber-500/80 shrink-0"></div>
+          <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-emerald-500/80 shrink-0"></div>
+          <span className="ml-1 sm:ml-2 text-[11px] sm:text-xs text-slate-400 flex items-center gap-1.5 font-sans truncate">
+            <FaTerminal className="text-blue-400 text-[9px] sm:text-[10px] shrink-0" />
+            <span className="truncate">saad-dev-environment v2.4</span>
           </span>
         </div>
 
         <button
           onClick={handleCopy}
-          className="flex items-center gap-1.5 text-xs text-slate-400 hover:text-white px-2 py-1 rounded-md bg-slate-800/60 hover:bg-slate-800 border border-slate-700/50 transition"
-          title="Copy to clipboard"
+          className="flex items-center gap-1 text-[11px] sm:text-xs text-slate-400 hover:text-white px-2 py-1 rounded-md bg-slate-800/60 hover:bg-slate-800 border border-slate-700/50 transition shrink-0"
+          title="Copy code"
         >
           {copied ? (
             <>
-              <FaCheck className="text-emerald-400 text-xs" />
-              <span className="text-emerald-400 text-[11px]">Copied</span>
+              <FaCheck className="text-emerald-400 text-[10px]" />
+              <span className="text-emerald-400 text-[10px] sm:text-[11px]">Copied</span>
             </>
           ) : (
             <>
-              <FaCopy className="text-xs" />
-              <span className="text-[11px]">Copy</span>
+              <FaCopy className="text-[10px]" />
+              <span className="text-[10px] sm:text-[11px]">Copy</span>
             </>
           )}
         </button>
@@ -118,13 +118,13 @@ const TerminalVisual = () => {
             <button
               key={tab.id}
               onClick={() => setActiveTab(tab.id)}
-              className={`flex items-center gap-2 px-4 py-2 text-xs border-r border-slate-800/80 transition-all font-mono whitespace-nowrap ${
+              className={`flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-2 text-[11px] sm:text-xs border-r border-slate-800/80 transition-all font-mono whitespace-nowrap ${
                 isActive
                   ? "bg-slate-950 text-blue-400 border-t-2 border-t-blue-500 font-medium"
                   : "text-slate-400 hover:text-slate-200 hover:bg-slate-900/60 border-t-2 border-t-transparent"
               }`}
             >
-              <Icon className={`text-sm ${tab.iconColor}`} />
+              <Icon className={`text-xs sm:text-sm ${tab.iconColor}`} />
               <span>{tab.filename}</span>
             </button>
           );
@@ -132,7 +132,7 @@ const TerminalVisual = () => {
       </div>
 
       {/* Code Editor Body */}
-      <div className="p-4 sm:p-5 text-[12px] sm:text-[13px] leading-relaxed overflow-x-auto max-h-[340px] select-text">
+      <div className="p-3 sm:p-5 text-[11px] sm:text-[13px] leading-relaxed overflow-x-auto max-h-[300px] sm:max-h-[340px] select-text">
         <AnimatePresence mode="wait">
           <motion.div
             key={activeTab}
@@ -145,7 +145,7 @@ const TerminalVisual = () => {
               <code>
                 {currentTab.code.split("\n").map((line, i) => (
                   <div key={i} className="table-row">
-                    <span className="table-cell select-none pr-4 text-slate-600 text-right text-[11px]">
+                    <span className="table-cell select-none pr-3 sm:pr-4 text-slate-600 text-right text-[10px] sm:text-[11px]">
                       {i + 1}
                     </span>
                     <span
@@ -170,17 +170,17 @@ const TerminalVisual = () => {
       </div>
 
       {/* Status Bar */}
-      <div className="flex items-center justify-between px-4 py-2 bg-slate-900/90 border-t border-slate-800 text-[11px] text-slate-400 font-mono">
-        <div className="flex items-center gap-3">
+      <div className="flex items-center justify-between px-3 sm:px-4 py-1.5 sm:py-2 bg-slate-900/90 border-t border-slate-800 text-[10px] sm:text-[11px] text-slate-400 font-mono">
+        <div className="flex items-center gap-2 sm:gap-3">
           <span className="flex items-center gap-1.5 text-emerald-400">
-            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-            Production Ready
+            <span className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+            Ready
           </span>
-          <span className="hidden sm:inline text-slate-500">|</span>
-          <span className="hidden sm:inline text-slate-400">UTF-8</span>
+          <span className="text-slate-600">|</span>
+          <span className="text-slate-400">UTF-8</span>
         </div>
-        <div className="flex items-center gap-2 text-blue-400 font-sans font-medium">
-          <FaPlay className="text-[9px]" />
+        <div className="flex items-center gap-1.5 text-blue-400 font-sans font-medium">
+          <FaPlay className="text-[8px] sm:text-[9px]" />
           <span>MERN • Flutter</span>
         </div>
       </div>

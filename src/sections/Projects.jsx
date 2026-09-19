@@ -14,7 +14,7 @@ const Projects = ({ onSelectProject }) => {
       : projectsData.filter((p) => p.category === activeCategory);
 
   return (
-    <section id="projects" className="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto scroll-mt-20">
+    <section id="projects" className="py-16 sm:py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto scroll-mt-20">
       <SectionHeading
         badge="COMPLETE REPERTORY"
         title="All"
@@ -23,14 +23,14 @@ const Projects = ({ onSelectProject }) => {
       />
 
       {/* Filter Tabs */}
-      <div className="flex flex-wrap items-center justify-center gap-2 mb-12">
+      <div className="flex flex-wrap items-center justify-center gap-1.5 sm:gap-2 mb-8 sm:mb-12">
         {projectCategories.map((cat) => {
           const isActive = activeCategory === cat;
           return (
             <button
               key={cat}
               onClick={() => setActiveCategory(cat)}
-              className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-medium transition-all duration-200 ${
+              className={`px-3 py-1.5 sm:px-4 sm:py-2 rounded-xl text-[11px] sm:text-xs md:text-sm font-medium transition-all duration-200 ${
                 isActive
                   ? "bg-blue-600 text-white shadow-md shadow-blue-500/25 scale-105"
                   : "bg-white text-slate-600 hover:text-slate-900 hover:bg-slate-100 border border-slate-200 dark:bg-slate-900/60 dark:text-slate-400 dark:hover:text-slate-200 dark:hover:bg-slate-800 dark:border-slate-800/80 shadow-sm dark:shadow-none"
@@ -45,7 +45,7 @@ const Projects = ({ onSelectProject }) => {
       {/* Projects Grid */}
       <motion.div
         layout
-        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-20"
+        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6 mb-16 sm:mb-20"
       >
         <AnimatePresence>
           {filteredProjects.map((project) => (
@@ -59,12 +59,12 @@ const Projects = ({ onSelectProject }) => {
       </motion.div>
 
       {/* GitHub Activity & Repositories */}
-      <div className="pt-8">
-        <div className="text-center mb-8">
-          <span className="text-xs font-mono font-semibold text-blue-600 dark:text-blue-400 uppercase tracking-widest block mb-2">
+      <div className="pt-4 sm:pt-8">
+        <div className="text-center mb-6 sm:mb-8">
+          <span className="text-[11px] sm:text-xs font-mono font-semibold text-blue-600 dark:text-blue-400 uppercase tracking-widest block mb-1.5 sm:mb-2">
             OPEN SOURCE & VERSION CONTROL
           </span>
-          <h3 className="text-2xl font-bold text-slate-900 dark:text-white">
+          <h3 className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white">
             GitHub & Coding Activity
           </h3>
         </div>

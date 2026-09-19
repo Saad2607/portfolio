@@ -45,26 +45,26 @@ const Navbar = () => {
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled
-          ? "bg-white/85 dark:bg-slate-950/80 backdrop-blur-xl border-b border-slate-200/80 dark:border-slate-800/80 shadow-md shadow-slate-900/5 dark:shadow-black/20 py-3"
-          : "bg-transparent py-5"
+          ? "bg-white/90 dark:bg-slate-950/85 backdrop-blur-xl border-b border-slate-200/80 dark:border-slate-800/80 shadow-md shadow-slate-900/5 dark:shadow-black/20 py-2.5 sm:py-3"
+          : "bg-transparent py-3 sm:py-5"
       }`}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
+      <div className="max-w-7xl mx-auto px-3.5 sm:px-6 lg:px-8 flex items-center justify-between">
         
         {/* Brand Logo */}
         <a
           href="#home"
-          className="flex items-center gap-2 group focus:outline-none"
+          className="flex items-center gap-2 group focus:outline-none shrink-0"
         >
-          <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-blue-600 to-cyan-400 flex items-center justify-center text-white font-mono font-bold text-base shadow-md shadow-blue-500/20 group-hover:scale-105 transition">
+          <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-gradient-to-tr from-blue-600 to-cyan-400 flex items-center justify-center text-white font-mono font-bold text-sm sm:text-base shadow-md shadow-blue-500/20 group-hover:scale-105 transition">
             S
           </div>
           <div className="flex flex-col text-left">
-            <span className="text-base font-bold text-slate-900 dark:text-white tracking-tight leading-tight group-hover:text-blue-500 transition">
+            <span className="text-sm sm:text-base font-bold text-slate-900 dark:text-white tracking-tight leading-tight group-hover:text-blue-500 transition">
               {personalInfo.shortName}
               <span className="text-blue-500">.dev</span>
             </span>
-            <span className="text-[10px] font-mono text-slate-500 dark:text-slate-400 leading-none">
+            <span className="text-[9px] sm:text-[10px] font-mono text-slate-500 dark:text-slate-400 leading-none">
               Full-Stack Eng
             </span>
           </div>
@@ -97,8 +97,8 @@ const Navbar = () => {
           })}
         </nav>
 
-        {/* Header Right Actions */}
-        <div className="hidden sm:flex items-center gap-3">
+        {/* Header Right Actions (Desktop) */}
+        <div className="hidden sm:flex items-center gap-2.5 sm:gap-3">
           <ThemeToggle />
 
           <a
@@ -122,16 +122,16 @@ const Navbar = () => {
           </a>
         </div>
 
-        {/* Mobile Menu Button & Toggle */}
-        <div className="flex items-center gap-2 lg:hidden">
+        {/* Mobile Actions: Theme Toggle & Hamburger */}
+        <div className="flex items-center gap-1.5 sm:gap-2 lg:hidden">
           <ThemeToggle />
           
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             aria-label="Toggle Navigation Menu"
-            className="p-2.5 rounded-xl border border-slate-200 bg-slate-100 text-slate-700 hover:bg-slate-200 dark:border-slate-800 dark:text-slate-300 dark:hover:text-white dark:bg-slate-900/80 transition"
+            className="p-2 sm:p-2.5 rounded-xl border border-slate-200 bg-slate-100 text-slate-700 hover:bg-slate-200 dark:border-slate-800 dark:text-slate-300 dark:hover:text-white dark:bg-slate-900/80 transition"
           >
-            {mobileMenuOpen ? <FaTimes className="text-lg" /> : <FaBars className="text-lg" />}
+            {mobileMenuOpen ? <FaTimes className="text-base sm:text-lg" /> : <FaBars className="text-base sm:text-lg" />}
           </button>
         </div>
       </div>
@@ -143,9 +143,9 @@ const Navbar = () => {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            className="lg:hidden bg-white/95 dark:bg-slate-950/95 border-b border-slate-200 dark:border-slate-800 backdrop-blur-2xl px-6 py-6 overflow-hidden shadow-xl"
+            className="lg:hidden bg-white/95 dark:bg-slate-950/95 border-b border-slate-200 dark:border-slate-800 backdrop-blur-2xl px-5 py-5 max-h-[calc(100dvh-70px)] overflow-y-auto shadow-xl"
           >
-            <div className="flex flex-col gap-2">
+            <div className="flex flex-col gap-1.5">
               {navLinks.map((link) => {
                 const isActive = activeSection === link.href.substring(1);
                 return (
@@ -164,7 +164,7 @@ const Navbar = () => {
                 );
               })}
 
-              <div className="pt-4 mt-2 border-t border-slate-200 dark:border-slate-800 flex items-center justify-between gap-3">
+              <div className="pt-3 mt-2 border-t border-slate-200 dark:border-slate-800 flex items-center justify-between gap-2.5">
                 <a
                   href={personalInfo.social.github}
                   target="_blank"
