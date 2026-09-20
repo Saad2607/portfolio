@@ -169,7 +169,7 @@ export default async function handler(req, res) {
       <td style="padding: 20px 32px; background-color: #0f172a; text-align: center; border-top: 1px solid #334155;">
         <p style="color: #64748b; font-size: 11px; margin: 0; line-height: 1.5;">
           This message was delivered automatically from your personal portfolio at 
-          <a href="https://github.com/Saad2607" style="color: #60a5fa; text-decoration: none;">Mohammed Saad Shaikh (Saad.dev)</a>.
+          <a href="https://portfolio-saad-shaikh.vercel.app/" style="color: #60a5fa; text-decoration: none;">Mohammed Saad Shaikh (Saad.dev)</a>.
         </p>
       </td>
     </tr>
