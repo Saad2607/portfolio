@@ -18,7 +18,7 @@ function localApiPlugin() {
 
             const env = loadEnv(process.env.NODE_ENV || 'development', process.cwd(), '')
             process.env.MY_EMAIL = process.env.MY_EMAIL || env.MY_EMAIL
-            process.env.MY_GMAIL_APP_PASSWORD = process.env.MY_GMAIL_APP_PASSWORD || env.MY_GMAIL_APP_PASSWORD
+            process.env.RESEND_API_KEY = process.env.RESEND_API_KEY || env.RESEND_API_KEY
 
             const { default: handler } = await import('./api/contact.js')
 

@@ -1,4 +1,4 @@
-import nodemailer from "nodemailer";
+import { Resend } from "resend";
 
 export default async function handler(req, res) {
   // CORS Headers for API calls
@@ -56,24 +56,18 @@ export default async function handler(req, res) {
     const cleanMessage = String(message).trim().slice(0, 5000);
 
     const recipientEmail = process.env.MY_EMAIL || "msaadbjs7@gmail.com";
-    const gmailAppPassword = process.env.MY_GMAIL_APP_PASSWORD;
+    const resendApiKey = process.env.RESEND_API_KEY;
 
-    if (!gmailAppPassword) {
-      console.error("Missing MY_GMAIL_APP_PASSWORD environment variable.");
+    if (!resendApiKey) {
+      console.error("Missing RESEND_API_KEY environment variable.");
       return res.status(500).json({
         success: false,
-        message: "Email service is not configured yet. Please configure MY_GMAIL_APP_PASSWORD."
+        message: "Email service is not configured yet. Please configure RESEND_API_KEY."
       });
     }
 
-    // 3. Configure Gmail SMTP Transporter
-    const transporter = nodemailer.createTransport({
-      service: "gmail",
-      auth: {
-        user: recipientEmail,
-        pass: gmailAppPassword.replace(/\s+/g, "") // remove any accidental spaces
-      }
-    });
+    // 3. Initialize Resend
+    const resend = new Resend(resendApiKey.trim());
 
     const formattedTime = new Date().toLocaleString("en-US", {
       timeZone: "Asia/Kolkata",
@@ -169,7 +163,7 @@ export default async function handler(req, res) {
       <td style="padding: 20px 32px; background-color: #0f172a; text-align: center; border-top: 1px solid #334155;">
         <p style="color: #64748b; font-size: 11px; margin: 0; line-height: 1.5;">
           This message was delivered automatically from your personal portfolio at 
-          <a href="https://portfolio-saad-shaikh.vercel.app/" style="color: #60a5fa; text-decoration: none;">Mohammed Saad Shaikh (Saad.dev)</a>.
+          <a href="https://github.com/Saad2607" style="color: #60a5fa; text-decoration: none;">Mohammed Saad Shaikh (Saad.dev)</a>.
         </p>
       </td>
     </tr>
@@ -179,25 +173,34 @@ export default async function handler(req, res) {
 </html>
     `;
 
-    // 5. Send mail via Nodemailer
-    await transporter.sendMail({
-      from: `"${cleanName} (via Saad.dev)" <${recipientEmail}>`,
-      to: recipientEmail,
-      replyTo: cleanEmail,
+    // 5. Send mail via Resend API
+    const { data, error } = await resend.emails.send({
+      from: `${cleanName} (via Saad.dev) <onboarding@resend.dev>`,
+      to: [recipientEmail],
+      reply_to: cleanEmail,
       subject: `💼 [Portfolio] ${cleanSubject} - from ${cleanName}`,
       html: htmlContent,
       text: `New message from ${cleanName} (${cleanEmail}):\n\nSubject: ${cleanSubject}\n\nMessage:\n${cleanMessage}`
     });
 
+    if (error) {
+      console.error("Resend API Error:", error);
+      return res.status(500).json({
+        success: false,
+        message: error.message || "Failed to dispatch email via Resend."
+      });
+    }
+
     return res.status(200).json({
       success: true,
-      message: "Your message has been sent successfully!"
+      message: "Your message has been sent successfully!",
+      id: data?.id
     });
   } catch (error) {
-    console.error("Error sending contact email via Nodemailer:", error);
+    console.error("Error in contact serverless handler:", error);
     return res.status(500).json({
       success: false,
-      message: error.message || "Failed to dispatch email. Please try again later."
+      message: error.message || "Failed to process contact request."
     });
   }
 }
