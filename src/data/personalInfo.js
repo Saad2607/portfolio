@@ -30,7 +30,7 @@ export const personalInfo = {
     filename: "Mohammed_Saad_Shaikh_Resume.pdf"
   },
   stats: [
-    { label: "Production & GitHub Projects", value: "13+" },
+    { label: "Production & GitHub Projects", value: "9+" },
     { label: "Core Tech Stack Tools", value: "15+" },
     { label: "Industry Internship Experience", value: "3 Months" },
     { label: "Clean Code & Test Mindset", value: "100%" }

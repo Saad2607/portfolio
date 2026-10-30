@@ -54,7 +54,7 @@ export default developer;`
 {
   "system": "ONLINE",
   "developer": "Mohammed Saad Shaikh",
-  "projectsCount": 13,
+  "projectsCount": 9,
   "activeInternship": "Tenup Software (Completed)",
   "flagshipProject": "FileBridge & QuickKart",
   "productionReady": true,

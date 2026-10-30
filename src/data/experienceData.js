@@ -2,7 +2,7 @@ export const workExperience = [
   {
     role: "Android Developer Intern",
     company: "Tenup Software",
-    location: "Remote / Hybrid",
+    location: "On-site",
     period: "3 Months",
     type: "Internship",
     badge: "Mobile Engineering",
@@ -41,7 +41,7 @@ export const journeyMilestones = [
     title: "Full-Stack MERN Specialization",
     category: "Full Stack Engineering",
     summary:
-      "Expanded into comprehensive full-stack engineering. Built large-scale MERN projects including QuickKart E-Commerce, Pulse Point Blood Bank Network, DairyFlow ERP, and CampusBot.",
+      "Expanded into comprehensive full-stack engineering. Built production-grade MERN projects including QuickKart E-Commerce, Pulse Point Blood Bank Network, PeoplePay360 HR & Payroll, and TransitOps Fleet Management.",
     keyTakeaways: ["RESTful API Architecture", "MongoDB Aggregations", "Role-Based Authentication", "State Management"]
   },
   {

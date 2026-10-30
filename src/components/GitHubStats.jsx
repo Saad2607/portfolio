@@ -10,6 +10,13 @@ const pinnedRepos = [
     url: "https://github.com/Saad2607/FileBridge"
   },
   {
+    name: "PeoplePay360-HR-Payroll",
+    description: "Enterprise MERN workforce, attendance tracking, and payroll execution engine.",
+    language: "JavaScript / MERN",
+    langColor: "bg-emerald-400",
+    url: "https://github.com/Saad2607/PeoplePay360-HR-Payroll"
+  },
+  {
     name: "E-Commerce",
     description: "Full-stack MERN e-commerce platform with admin dashboard and Cloudinary pipeline.",
     language: "JavaScript / MERN",
@@ -31,17 +38,10 @@ const pinnedRepos = [
     url: "https://github.com/Saad2607/TransitOps-Smart-Transport-Operations-Platform"
   },
   {
-    name: "odoo-cafe-pos",
-    description: "High-speed Point of Sale (POS) system for cafe and restaurant operations.",
-    language: "TypeScript",
-    langColor: "bg-blue-500",
-    url: "https://github.com/Saad2607/odoo-cafe-pos"
-  },
-  {
     name: "cake-shop-app",
-    description: "Cross-platform Flutter & Dart mobile shopping app for custom bakery orders.",
+    description: "Full-stack bakery mobile shopping app with Flutter, Node.js, and MongoDB.",
     language: "Flutter / Dart",
-    langColor: "bg-emerald-400",
+    langColor: "bg-purple-400",
     url: "https://github.com/Saad2607/cake-shop-app"
   }
 ];
