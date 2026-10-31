@@ -3,6 +3,7 @@ import { ThemeProvider } from "./context/ThemeContext";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import ProjectModal from "./components/ProjectModal";
+import ScrollToTop from "./components/ScrollToTop";
 
 import Hero from "./sections/Hero";
 import About from "./sections/About";
@@ -86,6 +87,9 @@ function AppContent() {
         isOpen={isModalOpen}
         onClose={handleCloseModal}
       />
+
+      {/* Floating Scroll to Top Button */}
+      <ScrollToTop />
     </div>
   );
 }

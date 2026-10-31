@@ -57,14 +57,6 @@ export default function Footer() {
         {/* Copyright & Back to Top */}
         <div className="flex items-center gap-4 text-xs text-slate-500 dark:text-slate-400 font-medium">
           <span>© {new Date().getFullYear()} {personalInfo.shortName}.dev</span>
-          <button
-            onClick={scrollToTop}
-            aria-label="Scroll to top of page"
-            className="p-2.5 rounded-xl glass-pill text-slate-600 hover:text-indigo-600 dark:text-slate-300 dark:hover:text-white transition flex items-center gap-1 shadow-sm"
-            title="Back to Top"
-          >
-            <FaArrowUp className="text-xs" />
-          </button>
         </div>
 
       </div>
