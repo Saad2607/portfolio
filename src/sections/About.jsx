@@ -58,7 +58,7 @@ export default function About() {
                 <div className="flex items-center gap-2">
                   <span className="w-2 h-2 rounded-full bg-indigo-500 animate-pulse" />
                   <span className="text-xs font-mono font-semibold text-indigo-600 dark:text-indigo-400 uppercase tracking-wider">
-                    Software Developer // Mumbai, India
+                    Software Developer // Vadodara, Gujarat, India
                   </span>
                 </div>
 
