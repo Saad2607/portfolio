@@ -83,16 +83,19 @@ const ContactForm = () => {
   };
 
   return (
-    <div className="w-full rounded-2xl sm:rounded-3xl bg-white/90 dark:bg-slate-900/60 backdrop-blur-xl border border-slate-200/80 dark:border-slate-800 p-4 sm:p-8 md:p-10 text-left shadow-md dark:shadow-xl">
+    <div className="w-full rounded-2xl sm:rounded-3xl bg-white/90 dark:bg-[#0c101d]/90 backdrop-blur-xl border border-slate-200/80 dark:border-white/10 p-5 sm:p-8 md:p-10 text-left shadow-lg dark:shadow-2xl relative overflow-hidden">
+      {/* Top subtle highlight */}
+      <div className="absolute top-0 inset-x-8 h-[1px] bg-gradient-to-r from-transparent via-indigo-500/40 to-transparent pointer-events-none" />
+
       <div className="flex flex-wrap items-center justify-between gap-2 mb-2">
-        <h3 className="text-lg sm:text-xl font-bold text-slate-900 dark:text-white">Send a Message</h3>
-        <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-blue-50 text-blue-700 border border-blue-200 dark:bg-blue-500/10 dark:text-blue-400 dark:border-blue-500/20">
+        <h3 className="text-lg sm:text-xl font-bold text-slate-900 dark:text-white">Send a Direct Message</h3>
+        <span className="text-[10px] font-mono px-2.5 py-0.5 rounded-full bg-indigo-50 text-indigo-700 border border-indigo-200 dark:bg-indigo-500/10 dark:text-indigo-300 dark:border-indigo-500/20 font-medium">
           Direct Inbox
         </span>
       </div>
 
-      <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 mb-5 sm:mb-6">
-        Have a project in mind, an internship opportunity, or want to discuss engineering? Let's connect.
+      <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 mb-5 sm:mb-6 leading-relaxed">
+        Have a project in mind, an engineering role, or want to discuss full-stack architecture? Let's connect.
       </p>
 
       <AnimatePresence mode="wait">
@@ -120,7 +123,7 @@ const ContactForm = () => {
                 href={`mailto:${personalInfo.email}`}
                 className="w-full sm:w-auto flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-xl text-xs font-medium text-slate-700 hover:text-slate-900 bg-white border border-slate-200 dark:bg-slate-800 dark:text-slate-300 dark:border-slate-700 dark:hover:text-white transition text-center"
               >
-                <FaEnvelope className="text-xs text-blue-500" />
+                <FaEnvelope className="text-xs text-indigo-500" />
                 <span>Open in Email App</span>
               </a>
             </div>
@@ -157,8 +160,8 @@ const ContactForm = () => {
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 sm:gap-4">
               <div>
-                <label htmlFor="name" className="block text-xs font-mono text-slate-700 dark:text-slate-400 mb-1 font-medium">
-                  Your Name <span className="text-blue-600 dark:text-blue-400">*</span>
+                <label htmlFor="name" className="block text-xs font-mono text-slate-300 mb-1 font-medium">
+                  Your Name <span className="text-indigo-400">*</span>
                 </label>
                 <input
                   type="text"
@@ -169,13 +172,13 @@ const ContactForm = () => {
                   onChange={handleChange}
                   placeholder="e.g. Alex Johnson"
                   disabled={status === "loading"}
-                  className="w-full px-3.5 sm:px-4 py-2.5 sm:py-3 rounded-xl bg-slate-50 border border-slate-200 focus:bg-white focus:border-blue-500 focus:ring-1 focus:ring-blue-500 text-sm text-slate-900 placeholder-slate-400 dark:bg-slate-950/70 dark:border-slate-800 dark:text-white dark:placeholder-slate-600 outline-none transition disabled:opacity-60"
+                  className="w-full px-3.5 sm:px-4 py-2.5 sm:py-3 rounded-xl glass-pill focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500/50 text-sm text-white placeholder-slate-500 outline-none transition disabled:opacity-60"
                 />
               </div>
 
               <div>
-                <label htmlFor="email" className="block text-xs font-mono text-slate-700 dark:text-slate-400 mb-1 font-medium">
-                  Your Email <span className="text-blue-600 dark:text-blue-400">*</span>
+                <label htmlFor="email" className="block text-xs font-mono text-slate-300 mb-1 font-medium">
+                  Your Email <span className="text-indigo-400">*</span>
                 </label>
                 <input
                   type="email"
@@ -186,13 +189,13 @@ const ContactForm = () => {
                   onChange={handleChange}
                   placeholder="alex@example.com"
                   disabled={status === "loading"}
-                  className="w-full px-3.5 sm:px-4 py-2.5 sm:py-3 rounded-xl bg-slate-50 border border-slate-200 focus:bg-white focus:border-blue-500 focus:ring-1 focus:ring-blue-500 text-sm text-slate-900 placeholder-slate-400 dark:bg-slate-950/70 dark:border-slate-800 dark:text-white dark:placeholder-slate-600 outline-none transition disabled:opacity-60"
+                  className="w-full px-3.5 sm:px-4 py-2.5 sm:py-3 rounded-xl glass-pill focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500/50 text-sm text-white placeholder-slate-500 outline-none transition disabled:opacity-60"
                 />
               </div>
             </div>
 
             <div>
-              <label htmlFor="subject" className="block text-xs font-mono text-slate-700 dark:text-slate-400 mb-1 font-medium">
+              <label htmlFor="subject" className="block text-xs font-mono text-slate-300 mb-1 font-medium">
                 Subject
               </label>
               <input
@@ -203,13 +206,13 @@ const ContactForm = () => {
                 onChange={handleChange}
                 placeholder="e.g. Full-Stack Opportunity / Project Inquiry"
                 disabled={status === "loading"}
-                className="w-full px-3.5 sm:px-4 py-2.5 sm:py-3 rounded-xl bg-slate-50 border border-slate-200 focus:bg-white focus:border-blue-500 focus:ring-1 focus:ring-blue-500 text-sm text-slate-900 placeholder-slate-400 dark:bg-slate-950/70 dark:border-slate-800 dark:text-white dark:placeholder-slate-600 outline-none transition disabled:opacity-60"
+                className="w-full px-3.5 sm:px-4 py-2.5 sm:py-3 rounded-xl glass-pill focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500/50 text-sm text-white placeholder-slate-500 outline-none transition disabled:opacity-60"
               />
             </div>
 
             <div>
-              <label htmlFor="message" className="block text-xs font-mono text-slate-700 dark:text-slate-400 mb-1 font-medium">
-                Message <span className="text-blue-600 dark:text-blue-400">*</span>
+              <label htmlFor="message" className="block text-xs font-mono text-slate-300 mb-1 font-medium">
+                Message <span className="text-indigo-400">*</span>
               </label>
               <textarea
                 id="message"
@@ -220,14 +223,14 @@ const ContactForm = () => {
                 onChange={handleChange}
                 placeholder="Tell me about your project, role, or inquiry..."
                 disabled={status === "loading"}
-                className="w-full px-3.5 sm:px-4 py-2.5 sm:py-3 rounded-xl bg-slate-50 border border-slate-200 focus:bg-white focus:border-blue-500 focus:ring-1 focus:ring-blue-500 text-sm text-slate-900 placeholder-slate-400 dark:bg-slate-950/70 dark:border-slate-800 dark:text-white dark:placeholder-slate-600 outline-none transition resize-none disabled:opacity-60"
+                className="w-full px-3.5 sm:px-4 py-2.5 sm:py-3 rounded-xl glass-pill focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500/50 text-sm text-white placeholder-slate-500 outline-none transition resize-none disabled:opacity-60"
               />
             </div>
 
             <button
               type="submit"
               disabled={status === "loading"}
-              className="w-full flex items-center justify-center gap-2 py-3.5 px-6 rounded-xl font-semibold text-sm text-white bg-blue-600 hover:bg-blue-500 disabled:opacity-50 transition shadow-lg shadow-blue-500/25 transform active:scale-[0.99] text-center"
+              className="w-full flex items-center justify-center gap-2 py-3.5 px-6 rounded-xl font-semibold text-sm text-white glass-button-primary disabled:opacity-50 transition-all shadow-lg active:scale-[0.99] text-center"
             >
               {status === "loading" ? (
                 <>

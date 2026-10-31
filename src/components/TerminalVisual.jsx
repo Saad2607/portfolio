@@ -1,31 +1,38 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { FaTerminal, FaCheck, FaCopy, FaPlay } from "react-icons/fa";
+import { FaCheck, FaCopy, FaPlay, FaSearch } from "react-icons/fa";
 import { SiJavascript, SiJson, SiGnubash } from "react-icons/si";
 
 const tabs = [
   {
     id: "developer",
-    filename: "developer.js",
+    filename: "developer.ts",
     icon: SiJavascript,
     iconColor: "text-yellow-400",
     code: `// Engineer Profile: Mohammed Saad Shaikh
-const developer = {
+interface Developer {
+  name: string;
+  role: string;
+  coreStack: string[];
+  mobile: string[];
+  status: string;
+}
+
+const saad: Developer = {
   name: "Mohammed Saad Shaikh",
-  role: "Full-Stack Developer",
-  coreStack: ["React.js", "Node.js", "Express", "MongoDB"],
-  mobileStack: ["Flutter", "Dart", "Firebase"],
+  role: "Full-Stack Engineer",
+  coreStack: ["React 18", "Node.js", "Express", "MongoDB Atlas"],
+  mobile: ["Flutter", "Dart", "Firebase"],
   status: "Open for Opportunities 🚀",
-  location: "India (Open to Remote / Relocation)",
   
-  getPhilosophy: () => ({
+  mindset: {
     cleanArchitecture: true,
-    performanceFocused: true,
-    continuousLearning: Infinity
-  })
+    scalableAPIs: true,
+    pixelPerfection: true
+  }
 };
 
-export default developer;`
+export default saad;`
   },
   {
     id: "stack",
@@ -33,15 +40,13 @@ export default developer;`
     icon: SiJson,
     iconColor: "text-amber-500",
     code: `{
-  "ecosystem": "Full-Stack & Mobile",
-  "technologies": {
-    "frontend": ["React.js", "Tailwind CSS", "Redux", "Vite"],
-    "backend": ["Node.js", "Express.js", "REST APIs", "JWT"],
-    "databases": ["MongoDB Atlas", "Firebase Firestore"],
-    "desktop": ["Electron.js"],
-    "mobile": ["Flutter", "Android SDK"],
-    "devops": ["Git", "GitHub", "Vercel", "Postman"]
-  },
+  "ecosystem": "Full-Stack MERN + Mobile",
+  "frontend": ["React 18", "Tailwind CSS", "Redux", "Vite"],
+  "backend": ["Node.js", "Express.js", "REST APIs", "JWT"],
+  "database": ["MongoDB Atlas", "PostgreSQL", "Firebase"],
+  "mobile": ["Flutter", "Dart", "Android SDK"],
+  "devops": ["Git", "GitHub", "Vercel", "Render", "Postman"],
+  "architecture": "Modular Microservices & REST",
   "openSource": true
 }`
   },
@@ -50,16 +55,16 @@ export default developer;`
     filename: "diagnostics.sh",
     icon: SiGnubash,
     iconColor: "text-emerald-400",
-    code: `$ curl -s https://api.saad.dev/status | jq .
+    code: `$ curl -s https://api.saad.dev/telemetry | jq .
 {
-  "system": "ONLINE",
-  "developer": "Mohammed Saad Shaikh",
-  "projectsCount": 9,
-  "activeInternship": "Tenup Software (Completed)",
-  "flagshipProject": "FileBridge & QuickKart",
-  "productionReady": true,
-  "latency": "14ms",
-  "recruiterAction": "READY_TO_CONNECT"
+  "status": "ONLINE",
+  "engineer": "Mohammed Saad Shaikh",
+  "publicRepos": 9,
+  "flagshipSystems": ["FileBridge", "QuickKart", "PulsePoint", "PeoplePay360"],
+  "internshipExperience": "Tenup Software (Android / Flutter)",
+  "codeQuality": "Production Grade",
+  "latency": "11ms",
+  "availability": "IMMEDIATE"
 }`
   }
 ];
@@ -77,40 +82,51 @@ const TerminalVisual = () => {
   };
 
   return (
-    <div className="w-full max-w-xl mx-auto rounded-2xl overflow-hidden shadow-xl sm:shadow-2xl border border-slate-300 dark:border-slate-800/80 bg-slate-950/95 text-left font-mono">
-      {/* Window Titlebar */}
-      <div className="flex items-center justify-between px-3 sm:px-4 py-2.5 sm:py-3 bg-slate-900/90 border-b border-slate-800 gap-2">
-        <div className="flex items-center gap-1.5 sm:gap-2 min-w-0">
-          <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-rose-500/80 shrink-0"></div>
-          <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-amber-500/80 shrink-0"></div>
-          <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-emerald-500/80 shrink-0"></div>
-          <span className="ml-1 sm:ml-2 text-[11px] sm:text-xs text-slate-400 flex items-center gap-1.5 font-sans truncate">
-            <FaTerminal className="text-blue-400 text-[9px] sm:text-[10px] shrink-0" />
-            <span className="truncate">saad-dev-environment v2.4</span>
+    <div className="w-full max-w-xl mx-auto rounded-2xl overflow-hidden shadow-2xl border border-slate-200/90 dark:border-white/10 bg-slate-900/95 dark:bg-[#0b0e17]/95 text-left font-mono relative backdrop-blur-2xl">
+      {/* Top subtle glow line */}
+      <div className="absolute top-0 inset-x-8 h-[1px] bg-gradient-to-r from-transparent via-indigo-500/50 to-transparent pointer-events-none" />
+
+      {/* Raycast-style Window Titlebar & Command Palette Bar */}
+      <div className="flex items-center justify-between px-3.5 sm:px-4 py-2.5 bg-slate-950/80 border-b border-slate-800/80 gap-2">
+        <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
+          <div className="w-2.5 h-2.5 rounded-full bg-rose-500/80"></div>
+          <div className="w-2.5 h-2.5 rounded-full bg-amber-500/80"></div>
+          <div className="w-2.5 h-2.5 rounded-full bg-emerald-500/80"></div>
+        </div>
+
+        {/* Raycast Command prompt simulation */}
+        <div className="flex items-center gap-2 px-3 py-1 rounded-lg bg-slate-900/90 border border-slate-800 text-[11px] text-slate-400 max-w-xs w-full justify-between hidden sm:flex">
+          <span className="flex items-center gap-1.5 truncate">
+            <FaSearch className="text-[10px] text-indigo-400 shrink-0" />
+            <span className="truncate text-slate-300">saad-runtime</span>
+          </span>
+          <span className="raycast-keycap text-[9px] py-0 px-1 bg-slate-800 text-slate-400 border-slate-700">
+            ⌘K
           </span>
         </div>
 
+        {/* Copy Button */}
         <button
           onClick={handleCopy}
-          className="flex items-center gap-1 text-[11px] sm:text-xs text-slate-400 hover:text-white px-2 py-1 rounded-md bg-slate-800/60 hover:bg-slate-800 border border-slate-700/50 transition shrink-0"
-          title="Copy code"
+          className="flex items-center gap-1.5 text-[11px] text-slate-400 hover:text-white px-2.5 py-1 rounded-md bg-slate-800/60 hover:bg-slate-800 border border-slate-700/50 transition shrink-0"
+          title="Copy code to clipboard"
         >
           {copied ? (
             <>
               <FaCheck className="text-emerald-400 text-[10px]" />
-              <span className="text-emerald-400 text-[10px] sm:text-[11px]">Copied</span>
+              <span className="text-emerald-400 text-[10px]">Copied</span>
             </>
           ) : (
             <>
               <FaCopy className="text-[10px]" />
-              <span className="text-[10px] sm:text-[11px]">Copy</span>
+              <span className="text-[10px]">Copy</span>
             </>
           )}
         </button>
       </div>
 
       {/* Tabs Header */}
-      <div className="flex items-center border-b border-slate-800/80 bg-slate-900/40 overflow-x-auto">
+      <div className="flex items-center border-b border-slate-800/80 bg-slate-950/40 overflow-x-auto">
         {tabs.map((tab) => {
           const Icon = tab.icon;
           const isActive = activeTab === tab.id;
@@ -118,13 +134,13 @@ const TerminalVisual = () => {
             <button
               key={tab.id}
               onClick={() => setActiveTab(tab.id)}
-              className={`flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-2 text-[11px] sm:text-xs border-r border-slate-800/80 transition-all font-mono whitespace-nowrap ${
+              className={`flex items-center gap-2 px-3.5 sm:px-4 py-2 text-[11px] sm:text-xs border-r border-slate-800/80 transition-all font-mono whitespace-nowrap ${
                 isActive
-                  ? "bg-slate-950 text-blue-400 border-t-2 border-t-blue-500 font-medium"
-                  : "text-slate-400 hover:text-slate-200 hover:bg-slate-900/60 border-t-2 border-t-transparent"
+                  ? "bg-slate-900/90 text-indigo-400 border-t-2 border-t-indigo-500 font-medium"
+                  : "text-slate-400 hover:text-slate-200 hover:bg-slate-900/40 border-t-2 border-t-transparent"
               }`}
             >
-              <Icon className={`text-xs sm:text-sm ${tab.iconColor}`} />
+              <Icon className={`text-xs ${tab.iconColor}`} />
               <span>{tab.filename}</span>
             </button>
           );
@@ -132,13 +148,13 @@ const TerminalVisual = () => {
       </div>
 
       {/* Code Editor Body */}
-      <div className="p-3 sm:p-5 text-[11px] sm:text-[13px] leading-relaxed overflow-x-auto max-h-[300px] sm:max-h-[340px] select-text">
+      <div className="p-3.5 sm:p-5 text-[11px] sm:text-[12.5px] leading-relaxed overflow-x-auto max-h-[310px] select-text">
         <AnimatePresence mode="wait">
           <motion.div
             key={activeTab}
-            initial={{ opacity: 0, y: 6 }}
+            initial={{ opacity: 0, y: 4 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -6 }}
+            exit={{ opacity: 0, y: -4 }}
             transition={{ duration: 0.15 }}
           >
             <pre className="text-slate-300">
@@ -152,10 +168,12 @@ const TerminalVisual = () => {
                       className={`table-cell whitespace-pre ${
                         line.startsWith("//") || line.startsWith("$")
                           ? "text-emerald-400/90"
-                          : line.includes("const") || line.includes("export") || line.includes("default")
-                          ? "text-purple-400"
+                          : line.includes("interface") || line.includes("const") || line.includes("export") || line.includes("default")
+                          ? "text-indigo-400 font-semibold"
+                          : line.includes("string") || line.includes("boolean")
+                          ? "text-cyan-400"
                           : line.includes(":") && !line.includes("http")
-                          ? "text-blue-300"
+                          ? "text-sky-300"
                           : "text-slate-200"
                       }`}
                     >
@@ -170,17 +188,17 @@ const TerminalVisual = () => {
       </div>
 
       {/* Status Bar */}
-      <div className="flex items-center justify-between px-3 sm:px-4 py-1.5 sm:py-2 bg-slate-900/90 border-t border-slate-800 text-[10px] sm:text-[11px] text-slate-400 font-mono">
+      <div className="flex items-center justify-between px-3.5 sm:px-4 py-2 bg-slate-950/90 border-t border-slate-800/80 text-[10px] text-slate-400 font-mono">
         <div className="flex items-center gap-2 sm:gap-3">
-          <span className="flex items-center gap-1.5 text-emerald-400">
-            <span className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-            Ready
+          <span className="flex items-center gap-1.5 text-emerald-400 font-semibold">
+            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+            Production Ready
           </span>
-          <span className="text-slate-600">|</span>
-          <span className="text-slate-400">UTF-8</span>
+          <span className="text-slate-700">|</span>
+          <span className="text-slate-400">git:(main)</span>
         </div>
-        <div className="flex items-center gap-1.5 text-blue-400 font-sans font-medium">
-          <FaPlay className="text-[8px] sm:text-[9px]" />
+        <div className="flex items-center gap-1.5 text-indigo-400 font-medium">
+          <FaPlay className="text-[7px]" />
           <span>MERN • Flutter</span>
         </div>
       </div>

@@ -1,146 +1,165 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { FaEnvelope, FaLinkedin, FaGithub, FaMapMarkerAlt, FaCopy, FaCheck, FaExternalLinkAlt, FaClock } from "react-icons/fa";
-import SectionHeading from "../components/SectionHeading";
-import ContactForm from "../components/ContactForm";
+import { 
+  FaEnvelope, 
+  FaGithub, 
+  FaLinkedin, 
+  FaMapMarkerAlt, 
+  FaFileDownload, 
+  FaCheck, 
+  FaCopy 
+} from "react-icons/fa";
 import { personalInfo } from "../data/personalInfo";
+import ContactForm from "../components/ContactForm";
 
-const Contact = () => {
-  const [copied, setCopied] = useState(false);
+export default function Contact() {
+  const [copiedEmail, setCopiedEmail] = useState(false);
 
   const handleCopyEmail = () => {
     navigator.clipboard.writeText(personalInfo.email);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
+    setCopiedEmail(true);
+    setTimeout(() => setCopiedEmail(false), 2000);
   };
 
   return (
-    <section id="contact" className="py-16 sm:py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto scroll-mt-20">
-      <SectionHeading
-        badge="LET'S CONNECT"
-        title="Get In"
-        highlight="Touch"
-        subtitle="Open to full-time engineering roles, freelance software consulting, and tech discussions."
-      />
-
-      <div className="grid lg:grid-cols-12 gap-6 sm:gap-8 text-left items-start">
+    <section id="contact" className="py-20 sm:py-28 relative scroll-mt-16">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
         
-        {/* Left Column: Direct Info Cards (5 cols) */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-          className="lg:col-span-5 space-y-3.5 sm:space-y-4 w-full"
-        >
-          {/* Email Card with 1-click Copy */}
-          <div className="p-4 sm:p-6 rounded-2xl sm:rounded-3xl bg-white/90 dark:bg-slate-900/60 backdrop-blur-xl border border-slate-200/80 dark:border-slate-800 flex flex-col justify-between shadow-md dark:shadow-xl">
-            <div className="flex items-center justify-between mb-3">
-              <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-blue-50 dark:bg-blue-500/10 text-blue-600 dark:text-blue-400 flex items-center justify-center text-base sm:text-lg shrink-0">
-                <FaEnvelope />
+        {/* Section Header */}
+        <div className="text-center max-w-2xl mx-auto space-y-3">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full glass-pill text-xs font-semibold text-indigo-600 dark:text-indigo-400">
+            <span>Connect &amp; Collaborate</span>
+          </div>
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight">
+            Get In Touch
+          </h2>
+          <p className="text-sm sm:text-base text-slate-600 dark:text-slate-400">
+            Have a project in mind, an opportunity, or just want to chat software? Let&apos;s connect!
+          </p>
+        </div>
+
+        {/* 2-Column Glassmorphism Layout */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start text-left">
+          
+          {/* Left Column: Direct Info & Quick Resume (Col 1-5) */}
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="lg:col-span-5 space-y-4"
+          >
+            {/* Email Card with 1-Click Copy */}
+            <div className="glass-card p-5 sm:p-6 rounded-2xl flex items-center justify-between">
+              <div className="flex items-center gap-3.5 min-w-0">
+                <div className="p-3 rounded-xl bg-rose-500/10 text-rose-500 shrink-0">
+                  <FaEnvelope className="w-5 h-5" />
+                </div>
+                <div className="min-w-0">
+                  <div className="text-xs text-slate-400 font-semibold uppercase tracking-wider">Email Me</div>
+                  <div className="text-sm font-semibold text-slate-900 dark:text-white truncate">
+                    {personalInfo.email}
+                  </div>
+                </div>
               </div>
               <button
                 onClick={handleCopyEmail}
-                className="flex items-center gap-1.5 px-2.5 sm:px-3 py-1 rounded-lg text-xs font-mono bg-slate-100 hover:bg-slate-200 text-slate-700 dark:bg-slate-800 dark:hover:bg-slate-700 dark:text-slate-300 transition"
-                title="Copy email address"
+                className="p-2.5 rounded-xl glass-pill text-xs font-semibold text-slate-600 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-white transition shrink-0 ml-2 flex items-center gap-1.5"
+                title="Copy Email to Clipboard"
               >
-                {copied ? (
-                  <>
-                    <FaCheck className="text-emerald-600 dark:text-emerald-400 text-xs" />
-                    <span className="text-emerald-600 dark:text-emerald-400 text-[11px] font-medium">Copied</span>
-                  </>
-                ) : (
-                  <>
-                    <FaCopy className="text-xs" />
-                    <span className="text-[11px]">Copy</span>
-                  </>
-                )}
+                {copiedEmail ? <FaCheck className="text-emerald-500 text-xs" /> : <FaCopy className="text-xs" />}
+                <span className="hidden sm:inline">{copiedEmail ? "Copied" : "Copy"}</span>
               </button>
             </div>
 
-            <div>
-              <div className="text-[11px] sm:text-xs font-mono text-slate-500 dark:text-slate-400 uppercase mb-1">Direct Email</div>
+            {/* Location & Availability Card */}
+            <div className="glass-card p-5 sm:p-6 rounded-2xl flex items-center gap-3.5">
+              <div className="p-3 rounded-xl bg-indigo-500/10 text-indigo-500 shrink-0">
+                <FaMapMarkerAlt className="w-5 h-5" />
+              </div>
+              <div>
+                <div className="text-xs text-slate-400 font-semibold uppercase tracking-wider">Location</div>
+                <div className="text-sm font-semibold text-slate-900 dark:text-white">
+                  {personalInfo.location} (Open to Remote &amp; Relocation)
+                </div>
+              </div>
+            </div>
+
+            {/* Social Channels Card */}
+            <div className="glass-card p-5 sm:p-6 rounded-2xl space-y-3">
+              <div className="text-xs text-slate-400 font-semibold uppercase tracking-wider">
+                Professional Networks
+              </div>
+              <div className="flex flex-wrap gap-2.5">
+                <a
+                  href={personalInfo.social.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex-1 inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl glass-pill text-xs font-semibold text-slate-700 dark:text-slate-200 hover:text-indigo-600 dark:hover:text-white transition"
+                >
+                  <FaGithub className="w-4 h-4" />
+                  <span>GitHub Profile</span>
+                </a>
+                <a
+                  href={personalInfo.social.linkedin}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex-1 inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl glass-pill text-xs font-semibold text-slate-700 dark:text-slate-200 hover:text-blue-500 dark:hover:text-white transition"
+                >
+                  <FaLinkedin className="w-4 h-4 text-blue-500" />
+                  <span>LinkedIn Profile</span>
+                </a>
+              </div>
+            </div>
+
+            {/* Resume Download Glass Card */}
+            <div className="glass-card p-5 sm:p-6 rounded-2xl space-y-3">
+              <div className="flex items-center justify-between">
+                <span className="text-xs text-slate-400 font-semibold uppercase tracking-wider">Curriculum Vitae</span>
+                <span className="text-[10px] px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 font-semibold">
+                  Updated
+                </span>
+              </div>
+              <p className="text-xs text-slate-600 dark:text-slate-400">
+                Download my full resume for a detailed view of my skills, projects, and coursework.
+              </p>
               <a
-                href={`mailto:${personalInfo.email}`}
-                className="text-sm sm:text-lg font-bold text-slate-900 dark:text-white hover:text-blue-600 dark:hover:text-blue-400 transition break-all leading-snug"
+                href={personalInfo.resume.downloadUrl}
+                download={personalInfo.resume.filename}
+                className="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl text-xs font-semibold text-white glass-button-primary shadow-sm transition active:scale-95"
               >
-                {personalInfo.email}
+                <FaFileDownload className="w-3.5 h-3.5" />
+                <span>Download Resume (PDF)</span>
               </a>
             </div>
-          </div>
 
-          {/* Social Cards Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
-            {/* LinkedIn */}
-            <a
-              href={personalInfo.social.linkedin}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="p-4 sm:p-5 rounded-xl sm:rounded-2xl bg-white/90 dark:bg-slate-900/60 backdrop-blur-xl border border-slate-200/80 dark:border-slate-800 hover:border-blue-400 dark:hover:border-blue-500/40 transition shadow-sm dark:shadow-none group flex flex-col justify-between"
-            >
-              <div className="flex items-center justify-between mb-2.5 sm:mb-3">
-                <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-blue-50 dark:bg-blue-500/10 text-blue-600 dark:text-blue-400 flex items-center justify-center text-sm sm:text-base">
-                  <FaLinkedin />
-                </div>
-                <FaExternalLinkAlt className="text-xs text-slate-400 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition" />
-              </div>
-              <div>
-                <div className="text-[11px] sm:text-xs font-mono text-slate-500 dark:text-slate-400 mb-0.5">Professional</div>
-                <div className="text-xs sm:text-sm font-bold text-slate-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition truncate">
-                  LinkedIn Profile
-                </div>
-              </div>
-            </a>
+          </motion.div>
 
-            {/* GitHub */}
-            <a
-              href={personalInfo.social.github}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="p-4 sm:p-5 rounded-xl sm:rounded-2xl bg-white/90 dark:bg-slate-900/60 backdrop-blur-xl border border-slate-200/80 dark:border-slate-800 hover:border-blue-400 dark:hover:border-slate-700 transition shadow-sm dark:shadow-none group flex flex-col justify-between"
-            >
-              <div className="flex items-center justify-between mb-2.5 sm:mb-3">
-                <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-slate-100 text-slate-800 dark:bg-slate-800 dark:text-white flex items-center justify-center text-sm sm:text-base">
-                  <FaGithub />
-                </div>
-                <FaExternalLinkAlt className="text-xs text-slate-400 group-hover:text-slate-900 dark:group-hover:text-white transition" />
+          {/* Right Column: Glassmorphism Contact Form (Col 6-12) */}
+          <motion.div
+            initial={{ opacity: 0, x: 20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="lg:col-span-7"
+          >
+            <div className="glass-card p-6 sm:p-8 rounded-3xl space-y-4">
+              <div className="border-b border-slate-200/60 dark:border-white/10 pb-3 flex items-center justify-between">
+                <h3 className="font-bold text-slate-900 dark:text-white text-base">
+                  Send a Message
+                </h3>
+                <span className="text-xs text-emerald-600 dark:text-emerald-400 font-medium">
+                  ● Direct Inbox Delivery
+                </span>
               </div>
-              <div>
-                <div className="text-[11px] sm:text-xs font-mono text-slate-500 dark:text-slate-400 mb-0.5">Codebase</div>
-                <div className="text-xs sm:text-sm font-bold text-slate-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition truncate">
-                  GitHub Profile
-                </div>
-              </div>
-            </a>
-          </div>
 
-          {/* Location & Response Time */}
-          <div className="p-3.5 sm:p-5 rounded-xl sm:rounded-2xl bg-white/80 dark:bg-slate-900/40 border border-slate-200/80 dark:border-slate-800/80 flex items-center justify-between text-[11px] sm:text-xs font-mono text-slate-600 dark:text-slate-400 shadow-sm dark:shadow-none">
-            <div className="flex items-center gap-1.5 sm:gap-2">
-              <FaMapMarkerAlt className="text-blue-600 dark:text-blue-400 text-xs shrink-0" />
-              <span>Location: {personalInfo.location}</span>
+              <ContactForm />
             </div>
-            <div className="flex items-center gap-1 sm:gap-1.5 text-emerald-600 dark:text-emerald-400 font-medium shrink-0">
-              <FaClock className="text-[10px] sm:text-[11px]" />
-              <span>~24h response</span>
-            </div>
-          </div>
-        </motion.div>
+          </motion.div>
 
-        {/* Right Column: Contact Form (7 cols) */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.15 }}
-          className="lg:col-span-7 w-full"
-        >
-          <ContactForm />
-        </motion.div>
+        </div>
 
       </div>
     </section>
   );
-};
-
-export default Contact;
+}

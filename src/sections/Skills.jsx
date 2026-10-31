@@ -1,145 +1,149 @@
-import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import {
-  FaReact,
-  FaNodeJs,
-  FaAndroid,
-  FaGithub,
-  FaDatabase
+import { motion } from "framer-motion";
+import { 
+  FaReact, 
+  FaNodeJs, 
+  FaGitAlt, 
+  FaHtml5, 
+  FaCss3Alt, 
+  FaDocker 
 } from "react-icons/fa";
-import {
-  SiJavascript,
-  SiTailwindcss,
-  SiHtml5,
-  SiRedux,
-  SiMui,
-  SiReactquery,
-  SiExpress,
-  SiJsonwebtokens,
-  SiMongodb,
-  SiFirebase,
-  SiCloudinary,
-  SiFlutter,
-  SiDart,
-  SiPostman,
-  SiVercel,
-  SiVite
+import { 
+  SiJavascript, 
+  SiTypescript, 
+  SiTailwindcss, 
+  SiRedux, 
+  SiExpress, 
+  SiMongodb, 
+  SiPostgresql, 
+  SiFlutter, 
+  SiDart, 
+  SiElectron, 
+  SiFirebase, 
+  SiPostman, 
+  SiVercel, 
+  SiJsonwebtokens 
 } from "react-icons/si";
-import { TbApi } from "react-icons/tb";
-import SectionHeading from "../components/SectionHeading";
-import { skillCategories, skillsData } from "../data/skillsData";
+import { FiCode, FiServer, FiDatabase, FiSmartphone, FiTool } from "react-icons/fi";
 
-// Icon mapping helper
-const iconMap = {
-  FaReact: FaReact,
-  SiJavascript: SiJavascript,
-  SiTailwindcss: SiTailwindcss,
-  SiHtml5: SiHtml5,
-  SiRedux: SiRedux,
-  SiMui: SiMui,
-  SiReactquery: SiReactquery,
-  FaNodeJs: FaNodeJs,
-  SiExpress: SiExpress,
-  TbApi: TbApi,
-  SiJsonwebtokens: SiJsonwebtokens,
-  SiMongodb: SiMongodb,
-  SiFirebase: SiFirebase,
-  SiCloudinary: SiCloudinary,
-  SiFlutter: SiFlutter,
-  SiDart: SiDart,
-  FaAndroid: FaAndroid,
-  FaGithub: FaGithub,
-  SiPostman: SiPostman,
-  SiVercel: SiVercel,
-  SiVite: SiVite
-};
+const skillGroups = [
+  {
+    category: "Frontend Development",
+    icon: <FiCode className="text-indigo-500 text-lg" />,
+    skills: [
+      { name: "React.js", icon: <FaReact className="text-[#61DAFB]" /> },
+      { name: "JavaScript (ES6+)", icon: <SiJavascript className="text-[#F7DF1E]" /> },
+      { name: "TypeScript", icon: <SiTypescript className="text-[#3178C6]" /> },
+      { name: "Tailwind CSS", icon: <SiTailwindcss className="text-[#06B6D4]" /> },
+      { name: "HTML5 & CSS3", icon: <FaHtml5 className="text-[#E34F26]" /> },
+      { name: "Redux Toolkit", icon: <SiRedux className="text-[#764ABC]" /> }
+    ]
+  },
+  {
+    category: "Backend & REST APIs",
+    icon: <FiServer className="text-cyan-500 text-lg" />,
+    skills: [
+      { name: "Node.js", icon: <FaNodeJs className="text-[#68A063]" /> },
+      { name: "Express.js", icon: <SiExpress className="text-slate-600 dark:text-slate-300" /> },
+      { name: "RESTful APIs", icon: <FiCode className="text-indigo-400" /> },
+      { name: "JWT Auth", icon: <SiJsonwebtokens className="text-emerald-500" /> },
+      { name: "MVC Architecture", icon: <FiServer className="text-amber-500" /> }
+    ]
+  },
+  {
+    category: "Databases & Cloud Storage",
+    icon: <FiDatabase className="text-emerald-500 text-lg" />,
+    skills: [
+      { name: "MongoDB Atlas", icon: <SiMongodb className="text-[#47A248]" /> },
+      { name: "PostgreSQL", icon: <SiPostgresql className="text-[#336791]" /> },
+      { name: "Cloudinary CDN", icon: <FiDatabase className="text-blue-400" /> },
+      { name: "Docker", icon: <FaDocker className="text-[#2496ED]" /> }
+    ]
+  },
+  {
+    category: "Mobile & Desktop Systems",
+    icon: <FiSmartphone className="text-purple-500 text-lg" />,
+    skills: [
+      { name: "Flutter", icon: <SiFlutter className="text-[#02569B]" /> },
+      { name: "Dart", icon: <SiDart className="text-[#0175C2]" /> },
+      { name: "Electron.js", icon: <SiElectron className="text-[#47848F]" /> },
+      { name: "Firebase Auth", icon: <SiFirebase className="text-[#FFA611]" /> },
+      { name: "Cloud Firestore", icon: <SiFirebase className="text-[#FFCA28]" /> }
+    ]
+  },
+  {
+    category: "DevOps & Developer Tools",
+    icon: <FiTool className="text-amber-500 text-lg" />,
+    skills: [
+      { name: "Git & GitHub", icon: <FaGitAlt className="text-[#F05032]" /> },
+      { name: "Postman", icon: <SiPostman className="text-[#FF6C37]" /> },
+      { name: "Vercel", icon: <SiVercel className="text-slate-800 dark:text-slate-200" /> },
+      { name: "Responsive UI/UX", icon: <FiCode className="text-indigo-400" /> }
+    ]
+  }
+];
 
-const Skills = () => {
-  const [activeCategory, setActiveCategory] = useState("all");
-
-  const filteredSkills =
-    activeCategory === "all"
-      ? skillsData
-      : skillsData.filter((skill) => skill.category === activeCategory);
-
+export default function Skills() {
   return (
-    <section id="skills" className="py-16 sm:py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto scroll-mt-20">
-      <SectionHeading
-        badge="TECHNICAL ARSENAL"
-        title="Skills &"
-        highlight="Technologies"
-        subtitle="A comprehensive toolkit honed across full-stack web, cloud, and mobile development."
-      />
+    <section id="skills" className="py-20 sm:py-28 relative scroll-mt-16">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+        
+        {/* Section Header */}
+        <div className="text-center max-w-2xl mx-auto space-y-3">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full glass-pill text-xs font-semibold text-indigo-600 dark:text-indigo-400">
+            <span>Core Competencies</span>
+          </div>
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight">
+            Technical Skills
+          </h2>
+          <p className="text-sm sm:text-base text-slate-600 dark:text-slate-400">
+            The programming languages, frameworks, and developer tools I leverage in production.
+          </p>
+        </div>
 
-      {/* Category Filter Pills */}
-      <div className="flex flex-wrap items-center justify-center gap-1.5 sm:gap-2 mb-8 sm:mb-12">
-        {skillCategories.map((cat) => {
-          const isActive = activeCategory === cat.id;
-          return (
-            <button
-              key={cat.id}
-              onClick={() => setActiveCategory(cat.id)}
-              className={`px-3 py-1.5 sm:px-4 sm:py-2 rounded-xl text-[11px] sm:text-xs md:text-sm font-medium transition-all duration-200 ${
-                isActive
-                  ? "bg-blue-600 text-white shadow-md shadow-blue-500/25 scale-105"
-                  : "bg-white text-slate-600 hover:text-slate-900 hover:bg-slate-100 border border-slate-200 dark:bg-slate-900/60 dark:text-slate-400 dark:hover:text-slate-200 dark:hover:bg-slate-800 dark:border-slate-800/80 shadow-sm dark:shadow-none"
-              }`}
+        {/* Skills Cards Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 text-left">
+          {skillGroups.map((group, idx) => (
+            <motion.div
+              key={group.category}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4, delay: idx * 0.1 }}
+              className="glass-card glass-card-interactive p-6 rounded-3xl flex flex-col justify-between"
             >
-              {cat.name}
-            </button>
-          );
-        })}
-      </div>
-
-      {/* Skills Grid */}
-      <motion.div
-        layout
-        className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3.5 sm:gap-4 text-left"
-      >
-        <AnimatePresence>
-          {filteredSkills.map((skill) => {
-            const IconComponent = iconMap[skill.icon] || FaDatabase;
-            return (
-              <motion.div
-                layout
-                key={skill.name}
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.9 }}
-                transition={{ duration: 0.25 }}
-                className="p-4 sm:p-5 rounded-2xl bg-white/90 dark:bg-slate-900/60 backdrop-blur-xl border border-slate-200/80 dark:border-slate-800/80 hover:border-blue-400 dark:hover:border-blue-500/50 hover:bg-white dark:hover:bg-slate-900/90 transition-all duration-300 shadow-sm dark:shadow-none group flex flex-col justify-between"
-              >
-                <div>
-                  <div className="flex items-center justify-between gap-2 mb-2.5 sm:mb-3">
-                    <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-slate-100 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700/60 flex items-center justify-center text-lg sm:text-xl text-blue-600 dark:text-blue-400 group-hover:scale-110 group-hover:bg-blue-50 dark:group-hover:bg-blue-500/10 transition">
-                      <IconComponent />
-                    </div>
-                    <span
-                      className={`text-[10px] font-mono font-medium px-2 py-0.5 rounded-full ${
-                        skill.level === "Advanced"
-                          ? "bg-emerald-50 text-emerald-700 border border-emerald-200 dark:bg-emerald-500/10 dark:text-emerald-400 dark:border-emerald-500/20"
-                          : "bg-blue-50 text-blue-700 border border-blue-200 dark:bg-blue-500/10 dark:text-blue-400 dark:border-blue-500/20"
-                      }`}
-                    >
-                      {skill.level}
-                    </span>
+              <div className="space-y-5">
+                {/* Header */}
+                <div className="flex items-center gap-3 border-b border-slate-200/60 dark:border-white/10 pb-4">
+                  <div className="p-2.5 rounded-xl glass-pill shadow-xs">
+                    {group.icon}
                   </div>
-
-                  <h3 className="text-sm sm:text-base font-bold text-slate-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition mb-1">
-                    {skill.name}
+                  <h3 className="font-bold text-base text-slate-900 dark:text-white">
+                    {group.category}
                   </h3>
-
-                  <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
-                    {skill.description}
-                  </p>
                 </div>
-              </motion.div>
-            );
-          })}
-        </AnimatePresence>
-      </motion.div>
+
+                {/* Skills Pill Badges */}
+                <div className="flex flex-wrap gap-2.5">
+                  {group.skills.map((skill) => (
+                    <div
+                      key={skill.name}
+                      className="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl glass-pill text-xs font-medium text-slate-700 dark:text-slate-200 hover:scale-105 transition-transform"
+                    >
+                      <span className="text-base shrink-0">{skill.icon}</span>
+                      <span>{skill.name}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <div className="pt-4 mt-4 border-t border-slate-100 dark:border-white/5 text-[11px] text-slate-400 font-mono">
+                {group.skills.length} Tools &amp; Technologies
+              </div>
+            </motion.div>
+          ))}
+        </div>
+
+      </div>
     </section>
   );
-};
-
-export default Skills;
+}

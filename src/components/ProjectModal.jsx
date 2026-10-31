@@ -31,68 +31,66 @@ const ProjectModal = ({ project, isOpen, onClose }) => {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={onClose}
-            className="absolute inset-0 bg-black/60 dark:bg-black/80 backdrop-blur-md"
+            className="absolute inset-0 bg-black/60 dark:bg-black/85 backdrop-blur-md"
           />
 
-          {/* Modal Container */}
+          {/* Modal Container (Glassmorphism Style) */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.95, y: 20 }}
+            initial={{ opacity: 0, scale: 0.95, y: 15 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.95, y: 20 }}
+            exit={{ opacity: 0, scale: 0.95, y: 15 }}
             transition={{ duration: 0.25, ease: "easeOut" }}
-            className="relative w-full max-w-3xl max-h-[88dvh] overflow-y-auto rounded-2xl sm:rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700/80 shadow-2xl p-4 sm:p-8 text-left z-10 text-slate-900 dark:text-slate-100"
+            className="relative w-full max-w-3xl max-h-[88dvh] overflow-y-auto rounded-3xl glass-card border border-white/15 shadow-2xl p-6 sm:p-8 md:p-10 text-left z-10 text-slate-100"
           >
+            {/* Top subtle highlight */}
+            <div className="absolute top-0 inset-x-8 h-[1px] bg-gradient-to-r from-transparent via-indigo-500/50 to-transparent pointer-events-none" />
+
             {/* Close Button */}
             <button
               onClick={onClose}
               aria-label="Close modal"
-              className="absolute top-3.5 right-3.5 sm:top-5 sm:right-5 p-2 sm:p-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-600 hover:text-slate-900 dark:bg-slate-800/80 dark:hover:bg-slate-700 dark:text-slate-400 dark:hover:text-white transition z-20"
+              className="absolute top-4 right-4 sm:top-6 sm:right-6 p-2 sm:p-2.5 rounded-xl glass-pill text-slate-300 hover:text-white transition z-20"
             >
               <FaTimes className="text-sm sm:text-base" />
             </button>
 
             {/* Header / Badges */}
-            <div className="flex flex-wrap items-center gap-1.5 sm:gap-2 mb-2.5 sm:mb-3 pr-10">
-              <span className="px-2.5 sm:px-3 py-0.5 sm:py-1 rounded-full text-[10px] sm:text-xs font-mono font-medium bg-blue-50 text-blue-700 border border-blue-200 dark:bg-blue-500/20 dark:text-blue-400 dark:border-blue-500/30">
+            <div className="flex flex-wrap items-center gap-2 mb-3 pr-10">
+              <span className="px-2.5 py-0.5 rounded-full text-[10px] sm:text-xs font-mono font-medium bg-indigo-50 text-indigo-700 border border-indigo-200 dark:bg-indigo-500/10 dark:text-indigo-300 dark:border-indigo-500/20">
                 {project.category}
               </span>
               {project.badge && (
-                <span className="px-2.5 sm:px-3 py-0.5 sm:py-1 rounded-full text-[10px] sm:text-xs font-mono font-medium bg-emerald-50 text-emerald-700 border border-emerald-200 dark:bg-emerald-500/20 dark:text-emerald-400 dark:border-emerald-500/30">
+                <span className="px-2.5 py-0.5 rounded-full text-[10px] sm:text-xs font-mono font-medium bg-emerald-50 text-emerald-700 border border-emerald-200 dark:bg-emerald-500/10 dark:text-emerald-400 dark:border-emerald-500/20">
                   {project.badge}
-                </span>
-              )}
-              {project.year && (
-                <span className="px-2 py-0.5 rounded text-[10px] sm:text-xs text-slate-500 dark:text-slate-400 font-mono">
-                  {project.year}
                 </span>
               )}
             </div>
 
             {/* Title & Subtitle */}
-            <h3 className="text-xl sm:text-3xl font-bold text-slate-900 dark:text-white mb-1.5 sm:mb-2 break-words pr-8">
+            <h3 className="text-xl sm:text-3xl font-extrabold text-slate-900 dark:text-white mb-1.5 break-words pr-8">
               {project.title}
             </h3>
             {project.subtitle && (
-              <p className="text-blue-600 dark:text-blue-400 font-medium text-xs sm:text-base mb-4 sm:mb-6">
+              <p className="text-indigo-600 dark:text-indigo-400 font-medium text-xs sm:text-base mb-5">
                 {project.subtitle}
               </p>
             )}
 
             {/* Description */}
-            <div className="mb-4 sm:mb-6">
-              <h4 className="text-[11px] sm:text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-1.5 sm:mb-2 flex items-center gap-1.5 sm:gap-2">
-                <FaLayerGroup className="text-blue-600 dark:text-blue-400" /> Project Overview
+            <div className="mb-5 sm:mb-6">
+              <h4 className="text-[11px] sm:text-xs font-mono font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-2 flex items-center gap-2">
+                <FaLayerGroup className="text-indigo-600 dark:text-indigo-400" /> Project Overview
               </h4>
-              <p className="text-slate-600 dark:text-slate-300 text-xs sm:text-base leading-relaxed">
+              <p className="text-slate-600 dark:text-slate-300 text-xs sm:text-sm leading-relaxed">
                 {project.description}
               </p>
             </div>
 
             {/* Problem Solved */}
             {project.problemSolved && (
-              <div className="mb-4 sm:mb-6 p-3.5 sm:p-4 rounded-xl sm:rounded-2xl bg-amber-500/10 dark:bg-slate-950/60 border border-amber-500/20 dark:border-slate-800">
-                <h4 className="text-[11px] sm:text-xs font-semibold uppercase tracking-wider text-amber-700 dark:text-amber-400 mb-1 sm:mb-2 flex items-center gap-1.5 sm:gap-2">
-                  <FaLightbulb className="text-amber-600 dark:text-amber-400" /> Problem It Solves
+              <div className="mb-5 sm:mb-6 p-4 rounded-xl sm:rounded-2xl bg-amber-500/10 dark:bg-slate-950/60 border border-amber-500/20 dark:border-white/10">
+                <h4 className="text-[11px] sm:text-xs font-mono font-semibold uppercase tracking-wider text-amber-700 dark:text-amber-400 mb-1.5 flex items-center gap-2">
+                  <FaLightbulb className="text-amber-600 dark:text-amber-400" /> Challenge & Solution
                 </h4>
                 <p className="text-slate-700 dark:text-slate-300 text-xs sm:text-sm leading-relaxed">
                   {project.problemSolved}
@@ -102,17 +100,17 @@ const ProjectModal = ({ project, isOpen, onClose }) => {
 
             {/* Key Features */}
             {project.highlights && project.highlights.length > 0 && (
-              <div className="mb-4 sm:mb-6">
-                <h4 className="text-[11px] sm:text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-2 sm:mb-3 flex items-center gap-1.5 sm:gap-2">
-                  <FaCheckCircle className="text-emerald-600 dark:text-emerald-400" /> Key Features & Capabilities
+              <div className="mb-5 sm:mb-6">
+                <h4 className="text-[11px] sm:text-xs font-mono font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-3 flex items-center gap-2">
+                  <FaCheckCircle className="text-emerald-600 dark:text-emerald-400" /> Key Architectural Capabilities
                 </h4>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-2.5">
                   {project.highlights.map((feature, i) => (
                     <div
                       key={i}
-                      className="flex items-start gap-2 p-2.5 sm:p-3 rounded-xl bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-800 text-xs sm:text-sm text-slate-700 dark:text-slate-300"
+                      className="flex items-start gap-2 p-3 rounded-xl bg-slate-50 dark:bg-white/[0.03] border border-slate-200 dark:border-white/10 text-xs sm:text-sm text-slate-700 dark:text-slate-300"
                     >
-                      <FaCheckCircle className="text-emerald-600 dark:text-emerald-400 text-xs sm:text-sm shrink-0 mt-0.5" />
+                      <FaCheckCircle className="text-emerald-600 dark:text-emerald-400 text-xs shrink-0 mt-0.5" />
                       <span>{feature}</span>
                     </div>
                   ))}
@@ -122,27 +120,24 @@ const ProjectModal = ({ project, isOpen, onClose }) => {
 
             {/* Architecture Details */}
             {project.architecture && (
-              <div className="mb-4 sm:mb-6">
-                <h4 className="text-[11px] sm:text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-1.5 sm:mb-2 flex items-center gap-1.5 sm:gap-2">
-                  <FaCogs className="text-purple-600 dark:text-purple-400" /> Technical Architecture
+              <div className="mb-5 sm:mb-6">
+                <h4 className="text-[11px] sm:text-xs font-mono font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-2 flex items-center gap-2">
+                  <FaCogs className="text-indigo-600 dark:text-indigo-400" /> Technical Architecture
                 </h4>
-                <p className="text-slate-700 dark:text-slate-300 text-[11px] sm:text-sm leading-relaxed p-3 sm:p-3.5 rounded-xl sm:rounded-2xl bg-slate-100 dark:bg-slate-950/50 border border-slate-200 dark:border-slate-800 font-mono">
+                <p className="text-slate-700 dark:text-slate-300 text-xs sm:text-sm leading-relaxed p-3.5 rounded-xl sm:rounded-2xl bg-slate-100 dark:bg-white/[0.02] border border-slate-200 dark:border-white/10 font-mono">
                   {project.architecture}
                 </p>
               </div>
             )}
 
-            {/* Tech Stack Badges */}
+            {/* Tech Stack Badges (Raycast Keycaps) */}
             <div className="mb-6 sm:mb-8">
-              <h4 className="text-[11px] sm:text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-2 sm:mb-3">
+              <h4 className="text-[11px] sm:text-xs font-mono font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-3">
                 Technologies & Tools
               </h4>
               <div className="flex flex-wrap gap-1.5 sm:gap-2">
                 {project.technologies.map((tech, i) => (
-                  <span
-                    key={i}
-                    className="px-2.5 sm:px-3 py-0.5 sm:py-1 rounded-lg text-[10px] sm:text-xs font-mono font-medium bg-slate-100 text-slate-700 border border-slate-200 dark:bg-slate-800 dark:text-slate-200 dark:border-slate-700 transition"
-                  >
+                  <span key={i} className="raycast-keycap text-[10px] sm:text-[11px]">
                     {tech}
                   </span>
                 ))}
@@ -150,13 +145,13 @@ const ProjectModal = ({ project, isOpen, onClose }) => {
             </div>
 
             {/* Footer Action Buttons */}
-            <div className="flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center gap-2.5 sm:gap-3 pt-3 sm:pt-4 border-t border-slate-200 dark:border-slate-800">
+            <div className="flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center gap-2.5 sm:gap-3 pt-4 border-t border-slate-200/80 dark:border-white/10">
               {project.github && project.github !== "#" && (
                 <a
                   href={project.github}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-full sm:w-auto flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl font-medium text-xs sm:text-sm bg-slate-100 hover:bg-slate-200 text-slate-800 border border-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 dark:text-white dark:border-slate-700 transition transform hover:-translate-y-0.5 text-center"
+                  className="w-full sm:w-auto flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl font-medium text-xs sm:text-sm bg-slate-100 hover:bg-slate-200 text-slate-800 border border-slate-200/90 dark:bg-slate-800 dark:hover:bg-slate-700 dark:text-white dark:border-white/10 transition-all text-center"
                 >
                   <FaGithub className="text-base" />
                   <span>View Repository</span>
@@ -168,7 +163,7 @@ const ProjectModal = ({ project, isOpen, onClose }) => {
                   href={project.live}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-full sm:w-auto flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl font-medium text-xs sm:text-sm bg-blue-600 hover:bg-blue-500 text-white shadow-lg shadow-blue-500/25 transition transform hover:-translate-y-0.5 text-center"
+                  className="w-full sm:w-auto flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl font-medium text-xs sm:text-sm bg-indigo-600 hover:bg-indigo-500 text-white shadow-lg shadow-indigo-500/25 transition-all text-center"
                 >
                   <FaExternalLinkAlt className="text-sm" />
                   <span>Launch Live Demo</span>
@@ -177,7 +172,7 @@ const ProjectModal = ({ project, isOpen, onClose }) => {
 
               <button
                 onClick={onClose}
-                className="w-full sm:w-auto px-5 py-2.5 rounded-xl text-xs sm:text-sm font-medium text-slate-600 hover:text-slate-900 hover:bg-slate-100 dark:text-slate-400 dark:hover:text-white dark:hover:bg-slate-800 transition sm:ml-auto text-center"
+                className="w-full sm:w-auto px-5 py-2.5 rounded-xl text-xs sm:text-sm font-medium text-slate-600 hover:text-slate-900 hover:bg-slate-100 dark:text-slate-400 dark:hover:text-white dark:hover:bg-white/5 transition sm:ml-auto text-center"
               >
                 Close
               </button>
